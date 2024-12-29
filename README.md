@@ -1,31 +1,47 @@
-# Akile Monitor Fe
+# LightMonitor Fe v0.1
 
-![预览](https://github.com/akile-network/akile_monitor_fe/blob/main/akile_monitor.jpg?raw=true)
+![预览](https://raw.githubusercontent.com/Lightshadow86/LightMonitor_FE/refs/heads/main/20241230051608.jpg)
 
-Akile Monitor 前端开源项目，各位可以自行去 [Github Actions](https://github.com/akile-network/akile_monitor_fe/actions) 下载最近的构建后的文件
+LightMonitor 前端开源项目，基于Akile Monitor前端开源项目修改
 
-新增加Github Actions并添加修改后的config.json文件，各位可以去自行下载，并修改config.json填写自己的后端API和WS地址
+需要修改config填写自己的后端API和WS地址（标题、副标题可选）
 
-## 安装
-```bash
-git clone https://github.com/akile-network/akile_monitor_fe.git
+注：仍在早期测试阶段，不建议应用在生产环境中
 
-cd akile_monitor_fe
+## 增加
 
-npm install
-```
+### 新增节点
+城市字段为可选，此字段为以后的更新做准备，可不填写，目前无实际意义
+### 前端标题
+前端支持自定义标题与副标题，默认为NodeStatus，在config内修改
+### 名称独立
+节点名称|地区的规则与Akile Monitor不同，地区使用Region控制，需要单独设置
+此修改将允许自定义节点名称
+### 新增模块
+增加了硬盘监控，网络数据包、连接数监控，系统进程数监控
+### 硬盘统计
+用“存储”卡片替换掉“服务器总数”，左侧为所有节点总计的已用空间，右侧为总空间。
+由于技术水平限制，暂时无法做到区分虚拟分区和物理磁盘，因此可能会出现空间较实际空间大的情况
 
-## 配置文件
-```
-构建后config.json中进行修改
-```
+## 调整
 
-## 打包
-```bash
-npm run build
-```
+默认的节点连接路径为/Monitor/Node
+默认的前端连接路径为/Monitor/Status
+默认的管理地址为/Monitor/Console
 
-## 开发
-```bash
-npm run dev
-```
+WebSocket连接逻辑完全重写，采用后端主动推送信息的方式（间隔一秒）
+在线|离线 计算所用时间戳均以服务端为主，节点之间时间|时区均可以不一致（但是相差太大导致间接的SSL错误是不可以的）
+系统名称在未展开时显示简称（Windows），展开后详细信息内可以查看全称
+处理器名称后不再携带“24 Virtual Cores”，而是显示完整的处理器名称
+自动重连：增加间隔为1秒
+
+移除商家宣传部分，替换为修改/更新节点
+
+## 添加|修改|删除节点
+
+添加节点按钮位于右上角的+号处
+
+修改节点与Akile Monitor前端类似，在每一个节点的右侧
+
+## 部署方式
+从release下载已构建的压缩包，解压并修改config后上传到网站服务器或Cloudflare Pages即可
