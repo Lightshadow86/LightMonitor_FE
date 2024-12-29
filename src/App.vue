@@ -190,7 +190,11 @@ const initSocket = async () => {
   socket.onclose = function () {
     // 显示警告提示并尝试重新连接
     Message.warning('WebSocket已断连，正在重连中...')
-    initSocket() // 重新调用初始化方法
+
+    // 设置延迟5秒后重新连接
+    setTimeout(function() {
+      initSocket(); // 重新调用初始化方法
+    }, 1000);
   }
 }
 
@@ -636,8 +640,8 @@ const handleEditClose = () => {
       </div>
     </div>
   </div>
-<div class="footer" style="margin-top: 30px">代码开源在 <a href="https://github.com/akile-network/akile_monitor">GitHub v0.0.2</a></div>
-<div class="footer" style="margin-bottom: 30px">Copyright © 2023-{{new Date().getFullYear()}} Akile LTD.</div>
+<div class="footer" style="margin-top: 30px"><a href="https://github.com/Lightshadow86/LightMonitor_FE">LightMonitorFE v0.1</a></div>
+<div class="footer" style="margin-bottom: 30px">Copyright © 2023-{{new Date().getFullYear()}} Akile LTD. | Light__shadow</div>
 </template>
 
 <style lang="scss">
