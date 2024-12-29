@@ -53,6 +53,9 @@ const options = ref({
     // margin: [0, -8, 0, -8],
     backgroundColor: "#00000000"
   },
+  accessibility: {
+    enabled: false //禁用可访问性及警告
+  },
   title: {
     text: null
   },

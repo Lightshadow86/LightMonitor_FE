@@ -55,6 +55,9 @@ const options = ref({
   title: {
     text: null
   },
+  accessibility: {
+    enabled: false //禁用可访问性及警告
+  },
   xAxis: {
     title: {
       text: null

@@ -13,6 +13,8 @@ const { stats, type } = defineProps({
       offline: 0,
       bandwidth_up: 0,
       bandwidth_down: 0,
+      disks_used: 0,
+      disks_total: 0,
     }),
   },
   type: {
@@ -28,15 +30,6 @@ const { stats, type } = defineProps({
   <div class="hero">
     <a-row :gutter="20">
       <a-col :span="6" :xs="24" :sm="24" :md="6" :lg="6" :sl="6">
-        <div class="hero-card all" :class="type === 'all' ? 'is-active' :''" @click="handleChangeType('all')">
-          <div class="title">服务器总数</div>
-          <div class="value">
-            <div class="status" style="background: #005fe7;"></div>
-            <span class="num">{{stats.total}} 台</span>
-          </div>
-        </div>
-      </a-col>
-      <a-col :span="6" :xs="24" :sm="24" :md="6" :lg="6" :sl="6">
         <div class="hero-card online" :class="type === 'online' ? 'is-active' :''" @click="handleChangeType('online')">
           <div class="title">在线服务器</div>
           <div class="value">
@@ -46,17 +39,8 @@ const { stats, type } = defineProps({
         </div>
       </a-col>
       <a-col :span="6" :xs="24" :sm="24" :md="6" :lg="6" :sl="6">
-        <div class="hero-card offline" :class="type === 'offline' ? 'is-active' :''" @click="handleChangeType('offline')">
-          <div class="title">离线服务器</div>
-          <div class="value">
-            <div class="status" style="background: #b41616;"></div>
-            <span class="num">{{stats.offline}} 台</span>
-          </div>
-        </div>
-      </a-col>
-      <a-col :span="6" :xs="24" :sm="24" :md="6" :lg="6" :sl="6">
         <div class="hero-card">
-          <div class="title">网络情况</div>
+          <div class="title">网络</div>
           <div class="value" style="display: block;">
             <div>
               流量
@@ -77,6 +61,28 @@ const { stats, type } = defineProps({
           </div>
         </div>
       </a-col>
+      <a-col :span="6" :xs="24" :sm="24" :md="6" :lg="6" :sl="6">
+        <div class="hero-card">
+          <div class="title">存储</div>
+          <div class="value" style="display: block;">
+            <div>
+              <span style="font-size: 16px;color: #d09453;">{{formatBytes(stats.disks_used)}}</span>
+              <span style="font-size: 18px;color: #cccccc;"> | </span>
+              <span style="font-size: 16px;color: #9a5fcd;">{{formatBytes(stats.disks_total)}}</span>
+            </div>
+          </div>
+        </div>
+      </a-col>
+      <a-col :span="6" :xs="24" :sm="24" :md="6" :lg="6" :sl="6">
+        <div class="hero-card offline" :class="type === 'offline' ? 'is-active' :''" @click="handleChangeType('offline')">
+          <div class="title">离线服务器</div>
+          <div class="value">
+            <div class="status" style="background: #b41616;"></div>
+            <span class="num">{{stats.offline}} 台</span>
+          </div>
+        </div>
+      </a-col>
+
     </a-row>
   </div>
 </template>

@@ -7,8 +7,10 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 const generateConfig = () => ({
-  socket: process.env.SOCKETURL || "ws://192.168.31.64:3000/ws",
-  apiURL: process.env.APIURL || "http://192.168.31.64:3000",
+  socket: process.env.SOCKETURL || "ws://127.0.0.1/Monitor/Status",
+  apiURL: process.env.APIURL || "http://127.0.0.1/Monitor/Console",
+  Title: process.env.Title || "NodeStatus",
+  SubTitle: process.env.Title || "",
 });
 
 // https://vite.dev/config/

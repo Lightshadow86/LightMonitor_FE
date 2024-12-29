@@ -80,6 +80,9 @@ const options = ref({
     // margin: [0, -8, 0, -8],
     backgroundColor: "#00000000"
   },
+  accessibility: {
+    enabled: false //禁用可访问性及警告
+  },
   title: {
     text: null
   },
@@ -162,11 +165,16 @@ defineExpose({
 </script>
 
 <template>
-  <div class="name">内存</div>
-  <div ref="chartRef" class="card-bg-chart"></div>
+  <div class="memory-chart-container">  <!--合并成一个div-->
+    <div class="name">内存</div>
+    <div ref="chartRef" class="card-bg-chart"></div>
+  </div>
 </template>
 
 <style scoped lang="scss">
+.memory-chart-container {  /* 新增样式容器 */
+  width: 100%;
+}
 .name {
   margin-bottom: 10px;
   font-size: 14px;
